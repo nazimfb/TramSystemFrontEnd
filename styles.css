@@ -1,0 +1,66 @@
+/* Apply styles to different map features */
+/* Geometry elements */
+.gm-style {
+    background-color: #242f3e; /* geometry */
+  }
+  /* Text stroke */
+  .gm-style label {
+    color: #746855; /* labels.text.stroke */
+  }
+  /* Text fill */
+  .gm-style label {
+    color: #746855; /* labels.text.fill */
+  }
+  /* Locality labels */
+  .gm-style .gm-style-cc, .gm-style .gm-style-cc a {
+    color: #d59563; /* administrative.locality, poi */
+  }
+  /* Park */
+  .gm-style .gm-style-poi .gm-style-poi-park {
+    fill: #263c3f; /* poi.park */
+  }
+  .gm-style .gm-style-poi .gm-style-poi-park-label {
+    color: #6b9a76; /* poi.park labels.text.fill */
+  }
+  /* Road */
+  .gm-style .gm-style-road {
+    stroke: #212a37; /* road */
+  }
+  .gm-style .gm-style-road {
+    fill: #38414e; /* road geometry */
+  }
+  .gm-style .gm-style-road .gm-style-road-label {
+    color: #9ca5b3; /* road labels.text.fill */
+  }
+  /* Highway */
+  .gm-style .gm-style-highway {
+    stroke: #1f2835; /* road.highway */
+  }
+  .gm-style .gm-style-highway {
+    fill: #746855; /* road.highway geometry */
+  }
+  .gm-style .gm-style-highway .gm-style-highway-label {
+    color: #f3d19c; /* road.highway labels.text.fill */
+  }
+  /* Transit */
+  .gm-style .gm-style-transit {
+    stroke: #2f3948; /* transit */
+  }
+  /* Station */
+  .gm-style .gm-style-transit .gm-style-transit-station {
+    fill: #2f3948; /* transit.station */
+  }
+  .gm-style .gm-style-transit .gm-style-transit-station-label {
+    color: #d59563; /* transit.station labels.text.fill */
+  }
+  /* Water */
+  .gm-style .gm-style-water {
+    stroke: #17263c; /* water */
+  }
+  .gm-style .gm-style-water {
+    fill: #17263c; /* water geometry */
+  }
+  .gm-style .gm-style-water .gm-style-water-label {
+    color: #515c6d; /* water labels.text.fill */
+  }
+  
