@@ -93,34 +93,10 @@ function initMap() {
   directionsService = new google.maps.DirectionsService();
   directionsRenderer = new google.maps.DirectionsRenderer();
   directionsRenderer.setMap(map);
-
-  drawingManager = new google.maps.drawing.DrawingManager({
-    drawingMode: google.maps.drawing.OverlayType.POLYLINE,
-    drawingControl: true,
-    drawingControlOptions: {
-      position: google.maps.ControlPosition.TOP_CENTER,
-      drawingModes: [google.maps.drawing.OverlayType.POLYLINE],
-    },
-    polylineOptions: {
-      editable: true,
-      strokeColor: "#FF0000",
-      strokeOpacity: 1.0,
-      strokeWeight: 2,
-    },
-  });
-
-  google.maps.event.addListener(drawingManager, "polylinecomplete", function (
-    polyline
-  ) {
-    drawnPolyline = polyline;
-  });
-
-  drawingManager.setMap(map);
 }
 
 window.onload = function () {
   if (typeof google === "object" && typeof google.maps === "object") {
-    // Google Maps API has already been loaded
     initMap();
   } else {
     // Load the Google Maps API asynchronously
@@ -130,38 +106,62 @@ window.onload = function () {
   }
 };
 
-function deleteLine() {
-  if (drawnPolyline) {
-    drawnPolyline.setMap(null);
-    drawnPolyline = null;
-    waypoints = []; // Clear waypoints array
+function findClosestStop() {
+  // Get user's current location
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      var userLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+
+      // Fetch tram stops from API
+      fetch("http://localhost:8080/api/v1/stops")
+        .then((response) => response.json())
+        .then((data) => {
+          // Find the closest tram stop
+          var closestStop = findClosestStopToUser(data, userLocation);
+
+          // Display the closest tram stop on the map
+          displayClosestStop(closestStop);
+        })
+        .catch((error) => console.error("Error fetching tram stops:", error));
+    });
+  } else {
+    console.error("Geolocation is not supported by this browser.");
   }
 }
 
-function createRoute() {
-  if (!drawnPolyline) {
-    window.alert("Please draw a route first.");
-    return;
-  }
+function findClosestStopToUser(stops, userLocation) {
+  var closestStop = null;
+  var closestDistance = Number.MAX_VALUE;
 
-  const path = drawnPolyline.getPath();
-  const waypoints = path.getArray().map(function(latLng) {
-    return { location: latLng };
-  });
-
-  const request = {
-    origin: waypoints[0].location,
-    destination: waypoints[waypoints.length - 1].location,
-    waypoints: waypoints.slice(1, -1),
-    travelMode: google.maps.TravelMode.DRIVING
-  };
-
-  directionsService.route(request, function(response, status) {
-    if (status === google.maps.DirectionsStatus.OK) {
-      directionsRenderer.setDirections(response);
-    } else {
-      window.alert("Directions request failed due to " + status);
+  stops.forEach((stop) => {
+    var stopLocation = {
+      lat: stop.latitude,
+      lng: stop.longitude,
+    };
+    var distance = google.maps.geometry.spherical.computeDistanceBetween(
+      new google.maps.LatLng(userLocation.lat, userLocation.lng),
+      new google.maps.LatLng(stopLocation.lat, stopLocation.lng)
+    );
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestStop = stop;
     }
   });
+
+  return closestStop;
 }
 
+function displayClosestStop(stop) {
+  // Assuming you have a map object created in your map-script.js
+  var marker = new google.maps.Marker({
+    position: { lat: stop.latitude, lng: stop.longitude },
+    map: map,
+    title: stop.name,
+  });
+
+  // Optionally, you can center the map on the closest stop
+  map.setCenter(marker.getPosition());
+}

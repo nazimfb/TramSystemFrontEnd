@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin Dashboard</title>
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4jmkNsWVP6wVGoQ2UzrL4w0OmeoJvCM0&libraries=drawing&callback=initMap"
+    ></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      /* Style for side menu */
+    </style>
+  </head>
+
+  <body>
+    <div id="side-menu">
+      <button><a href="http://127.0.0.1:5500/" class="button">Home</a></button>
+      <button onclick="monitorMap()">Map</button>
+      <button onclick="manageMentPage()">Management</button>
+      <!-- <button onclick="manageTrams()">Manage Trams</button>
+      <button onclick="manageStops()">Manage Stops</button>
+      <button onclick="manageAdmins()">Manage Admins</button> 
+      <button class="back-button" onclick="http://127.0.0.1:5500/main.html">Back</button> -->
+    </div>
+
+    <div id="main-container">
+      <div id="map-container">
+        <div id="map"></div>
+      </div>
+      <div id="button-container">
+        <button class="blue-button" onclick="createRoute()">
+          Create Route
+        </button>
+        <button onclick="deleteLine()">Delete Line</button>
+      </div>
+    </div>
+  </body>
+</html>

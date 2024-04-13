@@ -1,33 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Admin Dashboard</title>
+    <title>Main Page</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/mainstyle.css" />
     <script
       async
+      defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4jmkNsWVP6wVGoQ2UzrL4w0OmeoJvCM0&libraries=drawing&callback=initMap"
     ></script>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="script.js"></script>
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-    * element that contains the map. */
-      #map {
-        height: 80vh;
-        width: 80%;
-        margin: 0 auto;
-      }
-
-      /* Optional: Makes the sample page fill the window. */
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
+    <script type="text/javascript" src="map-script.js"></script>
   </head>
+
   <body>
+    <div class="overlay"></div>
+    <!-- Overlay added here -->
+
+    <div id="button-container">
+      <button class="transparent-button" onclick="login()">Admin Login</button>
+    </div>
+
     <div id="map"></div>
-    <button onclick="createRoute()">Create Route</button>
+
+    <div id="button-container">
+      <button class="transparent-button" onclick="findClosestStop()">
+        Find Closest Stop
+      </button>
+    </div>
   </body>
 </html>
