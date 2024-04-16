@@ -112,7 +112,31 @@ function initMap() {
   google.maps.event.addListener(drawingManager, "polylinecomplete", function (
     polyline
   ) {
+    if (drawnPolyline) {
+      drawnPolyline.setMap(null);
+    }
     drawnPolyline = polyline;
+    drawnPolyline.setMap(map);
+
+    const path = drawnPolyline.getPath();
+    const waypoints = path.getArray().map(function (latLng) {
+      return { location: latLng };
+    });
+
+    const requestData = {
+      origin: waypoints[0].location,
+      destination: waypoints[waypoints.length - 1].location,
+      waypoints: waypoints.slice(1, -1),
+      travelMode: google.maps.TravelMode.DRIVING,
+    };
+
+    directionsService.route(requestData, function (response, status) {
+      if (status === google.maps.DirectionsStatus.OK) {
+        directionsRenderer.setDirections(response);
+      } else {
+        window.alert("Directions request failed due to " + status);
+      }
+    });
   });
 
   drawingManager.setMap(map);
@@ -134,34 +158,51 @@ function deleteLine() {
   if (drawnPolyline) {
     drawnPolyline.setMap(null);
     drawnPolyline = null;
-    waypoints = []; // Clear waypoints array
   }
+  directionsRenderer.setDirections({ routes: [] }); // Clear directions
 }
 
 function createRoute() {
-  if (!drawnPolyline) {
-    window.alert("Please draw a route first.");
+  if (!drawnPolyline || drawnPolyline.getPath().getLength() < 2) {
+    window.alert("Route must have at least two points");
+    return;
+  }
+
+  const routeName = prompt("Enter the name of the route:");
+  if (!routeName) {
+    window.alert("Route name cannot be empty.");
     return;
   }
 
   const path = drawnPolyline.getPath();
-  const waypoints = path.getArray().map(function(latLng) {
+  const waypoints = path.getArray().map(function (latLng) {
     return { location: latLng };
   });
 
-  const request = {
-    origin: waypoints[0].location,
-    destination: waypoints[waypoints.length - 1].location,
-    waypoints: waypoints.slice(1, -1),
-    travelMode: google.maps.TravelMode.DRIVING
+  const requestData = {
+    name: routeName,
+    waypoints: waypoints,
   };
 
-  directionsService.route(request, function(response, status) {
-    if (status === google.maps.DirectionsStatus.OK) {
-      directionsRenderer.setDirections(response);
-    } else {
-      window.alert("Directions request failed due to " + status);
-    }
-  });
+  fetch("http://localhost:8080/api/v1/routes", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestData),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Route created successfully:", data);
+      window.alert("Route created successfully: " + JSON.stringify(data));
+    })
+    .catch((error) => {
+      console.error("Error creating route:", error);
+      window.error("Error creating route:", error);
+    });
 }
-
