@@ -8,6 +8,7 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4jmkNsWVP6wVGoQ2UzrL4w0OmeoJvCM0&libraries=drawing&callback=initMap"
     ></script>
     <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="monitoringScripts.js"></script>
     <link rel="stylesheet" href="/styles.css" />
     <style>
       /* Style for side menu */
@@ -16,9 +17,9 @@
 
   <body>
     <div id="side-menu">
-      <button><a href="http://127.0.0.1:5500/" class="button">Home</a></button>
-      <button onclick="monitorMap()">Map</button>
-      <button onclick="manageMentPage()">Management</button>
+      <button onclick="monitorMap()">Monitor Map</button>
+      <button onclick="editMap()">Edit Map</button>
+      <button class="home-button"><a href="http://127.0.0.1:5500/" class="button">Home</a></button>
       <!-- <button onclick="manageTrams()">Manage Trams</button>
       <button onclick="manageStops()">Manage Stops</button>
       <button onclick="manageAdmins()">Manage Admins</button> 
@@ -30,8 +31,12 @@
         <div id="map"></div>
       </div>
       <div id="button-container">
-        <button class="blue-button" onclick="createRoute()">Create Route</button>
+        <button onclick="monitorRoutes()">Monitor Routes</button>
+        <button onclick="monitorActiveTrams()">Monitor Active Trams</button>
+        <button onclick="createRoute()">Create Route</button>
         <button onclick="deleteLine()">Delete Line</button>
+        <button onclick="stopMonitoringAndClearMap()">Stop Monitoring and Clear Map</button>
+        <button onclick="stopMonitoringTrams()">Stop Monitoring Trams</button>
       </div>
     </div>
   </body>

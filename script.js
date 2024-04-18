@@ -3,6 +3,7 @@ let directionsService;
 let directionsRenderer;
 let drawingManager;
 let drawnPolyline;
+let tramMarkers = [];
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
@@ -176,7 +177,7 @@ function createRoute() {
 
   const path = drawnPolyline.getPath();
   const waypoints = path.getArray().map(function (latLng) {
-    return { location: latLng };
+    return { lat: latLng.lat(), lng: latLng.lng() };
   });
 
   const requestData = {
@@ -206,3 +207,4 @@ function createRoute() {
       window.error("Error creating route:", error);
     });
 }
+

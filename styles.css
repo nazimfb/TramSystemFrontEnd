@@ -51,7 +51,7 @@ body {
 
 #button-container {
   width: 100%;
-  max-width: 400px; /* Limit button container width */
+  max-width: 500px; /* Limit button container width */
   text-align: center;
 }
 #button-container button {
@@ -59,6 +59,7 @@ body {
   color: white; /* Button text color */
   border: none;
   padding: 10px;
+  margin: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -68,6 +69,10 @@ body {
 }
 #button-container button:active {
   transform: scale(0.95);
+}
+
+.home-button {
+  width: 100px;
 }
 
 a.button {
