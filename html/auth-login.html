@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Tram System</title>
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <link rel="stylesheet" href="/styles/login.css" />
+  </head>
+  <body>
+    <div id="login-container">
+      <h1>Authentication</h1>
+
+      <div id="loginForm">
+        <h2>Login</h2>
+        <input type="text" id="email" placeholder="Email" />
+        <input type="password" id="password" placeholder="Password" />
+        <button onclick="login()">Login</button>
+      </div>
+
+      <div id="userInfo" style="display: none">
+        <h2>Welcome, <span id="usernameDisplay"></span>!</h2>
+        <button onclick="logoutAndRemoveUserInfo()">Logout</button>
+        <a href="index.html">Go to Home</a>
+      </div>
+    </div>
+    <div class="overlay"></div>
+
+    <script src="/scripts/auth.js"></script>
+  </body>
+</html>

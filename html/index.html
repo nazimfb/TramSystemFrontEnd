@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Main | Tram System</title>
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <link rel="stylesheet" href="/styles/index-style.css" />
+  </head>
+  <body>
+    <div class="overlay"></div>
+
+    <div id="main-container">
+      <div id="button-container">
+        <button id="dashboard-btn" style="display: none">Dashboard</button>
+        <button id="logout-btn"style="display: none">Logout</button>
+        <button id="login-btn">Login</button>
+        <button id="register-btn">Register</button>
+        <!-- Show Admin Panel button or My Tickets button based on user role -->
+        <button id="admin-panel-btn" style="display: none">Admin Panel</button>
+        <button id="my-tickets-btn" style="display: none">My Tickets</button>
+      </div>
+
+      <div id="map"></div>
+
+      <div id="button-container">
+        <button class="transparent-button" onclick="findClosestStop()">
+          Find Closest Stop
+        </button>
+        <button class="transparent-button" onclick="showAllStops()">
+          All Stops
+        </button>
+      </div>
+    </div>
+
+    <script async defer src="http://localhost:8080/map"></script>
+    <script type="text/javascript" src="/scripts/index-scripts.js"></script>
+    <script type="text/javascript" src="/scripts/map-script.js"></script>
+    <script type="text/javascript" src="/scripts/auth.js"></script>
+    <script>
+      // Call the function to show user buttons when the page loads
+      window.onload = showUserButtons;
+    </script>
+  </body>
+</html>

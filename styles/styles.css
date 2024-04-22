@@ -3,7 +3,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #003507;
+  background-color: #01550c;
 }
 
 /* Left Side Menu */
@@ -17,6 +17,7 @@ body {
   padding: 20px;
   color: white; /* text color */
 }
+
 #side-menu button {
   display: block;
   margin-bottom: 10px;
@@ -50,19 +51,22 @@ body {
 }
 
 #button-container {
+  position: relative;
   width: 100%;
-  max-width: 500px; /* Limit button container width */
+  max-width: 550px;
   text-align: center;
+  margin: auto;
 }
 #button-container button {
-  background-color: #4caf50; /* Greenish background color */
-  color: white; /* Button text color */
+  background-color: #4caf50;
+  color: white;
   border: none;
   padding: 10px;
-  margin: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin: 5px;
 }
+
 #button-container button:focus,
 #button-container button:hover {
   background: #388e3c;
@@ -82,4 +86,33 @@ a.button {
   color: white;
   background-color: #555;
   text-decoration: none;
+}
+
+/*media query for screens smaller than 768px*/
+@media only screen and (max-width: 768px) {
+  #side-menu {
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: auto;
+    padding: 10px;
+  }
+
+  #main-container {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+/*media query for screens smaller than 576px (typical mobile devices)*/
+@media only screen and (max-width: 576px) {
+  #button-container {
+    max-width: none;
+    padding: 0;
+  }
+
+  .transparent-button {
+    display: block;
+    width: 100%;
+  }
 }

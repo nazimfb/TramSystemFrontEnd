@@ -1,0 +1,26 @@
+/* Add your existing styles here */
+
+#registration-container {
+    display: flex;
+    flex-direction: column; /* Arrange children in a column */
+    align-items: center; /* Center items horizontally */
+    height: 100vh; /* Set the container height to full viewport height */
+}
+
+h1 {
+    text-align: center; /* Center the text */
+    margin: 20px 0; /* Add margin for spacing */
+}
+
+#registrationForm {
+    padding: 20px; /* Add padding for better spacing */
+}
+
+#background-container {
+    background-image: url("/static/tram-background.png");
+    background-size: cover; /* Cover the entire background */
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 70%;
+    flex: 1; 
+}
