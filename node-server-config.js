@@ -4,10 +4,10 @@ const path = require("path");
 
 const host = '192.168.1.69';
 const port = 8000;
-const htmlDir = "../html";
-const cssDir = "../styles"; 
-const jsDir = "../scripts"; 
-const staticDir = "../static"; 
+const htmlDir = "/";
+const cssDir = "/styles"; 
+const jsDir = "/scripts"; 
+const staticDir = "/static"; 
 
 const requestListener = function (req, res) {
     let filePath = path.join(__dirname, htmlDir, req.url);

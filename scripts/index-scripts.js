@@ -89,6 +89,36 @@ function redirectToDashboard() {
   window.location.href = "/html/map.html";
 }
 
+// async function redirectToDashboard() {
+//   try {
+//     const accessToken = localStorage.getItem("accessToken");
+//     if (!accessToken) {
+//       // Handle the case where access token is not available
+//       console.error("Access token not found.");
+//       return;
+//     }
+
+//     const response = await fetch("/dashboard", {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${accessToken}`,
+//       },
+//     });
+
+//     if (response.ok) {
+//       const htmlContent = await response.text();
+//       document.body.innerHTML = htmlContent; // Replace the entire HTML content with the dashboard HTML
+//     } else {
+//       // Handle error responses from the server
+//       console.error("Error:", response.statusText);
+//     }
+//   } catch (error) {
+//     // Handle network errors
+//     console.error("Error:", error.message);
+//   }
+// }
+
 function logoutAndRefresh() {
   logout();
   location.reload();
