@@ -180,18 +180,20 @@ function createRoute() {
     return { lat: latLng.lat(), lng: latLng.lng() };
   });
 
-  const requestData = {
-    name: routeName,
-    waypoints: waypoints,
-  };
-
-  fetch("http://localhost:8080/api/v1/routes", {
+  const accessToken = localStorage.getItem('accessToken');
+  const requestOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Authorization": `Bearer ${accessToken}`
     },
-    body: JSON.stringify(requestData),
-  })
+    body: JSON.stringify({
+      name: routeName,
+      waypoints: waypoints
+    })
+  };
+
+  fetch("http://localhost:8080/api/v1/routes", requestOptions)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -207,4 +209,3 @@ function createRoute() {
       window.error("Error creating route:", error);
     });
 }
-

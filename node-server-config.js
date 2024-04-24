@@ -2,7 +2,7 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 
-const host = '192.168.1.69';
+const host = '192.168.10.164';
 const port = 8000;
 const htmlDir = "/";
 const cssDir = "/styles"; 
@@ -23,10 +23,7 @@ const requestListener = function (req, res) {
                 serveFile(path.join(__dirname, jsDir, path.basename(filePath)), res);
             } else if (req.url.startsWith('/static')) {
                 serveFile(path.join(__dirname, staticDir, path.basename(filePath)), res);
-            } else {
-                res.writeHead(403);
-                res.end("403 Forbidden: Direct access to files is not allowed");
-            }
+            } 
         } else {
             // Otherwise, deny access
             res.writeHead(403);
