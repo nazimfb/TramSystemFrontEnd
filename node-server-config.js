@@ -2,7 +2,7 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 
-const host = '192.168.10.164';
+const host = 'localhost';
 const port = 8000;
 const htmlDir = "/";
 const cssDir = "/styles"; 

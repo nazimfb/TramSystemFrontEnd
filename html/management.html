@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Management|Admin Dashboard</title>
+    <title>Management | Admin Dashboard</title>
     <link rel="stylesheet" href="/styles/styles.css" />
     <style>
       /* Adjustments for centering buttons */
@@ -15,6 +15,7 @@
 
       .button-container {
         text-align: center;
+        margin-top: 20px;
       }
 
       .button-container button {
@@ -31,11 +32,7 @@
     <div id="side-menu">
       <button class="home-button"><a href="/html/index.html" class="button">Home</a></button>
       <button onclick="redirectToMap()">Map</button>
-      <!-- <button onclick="manageMentPage()">Management</button> -->
-      <!-- <button onclick="manageTrams()">Manage Trams</button>
-        <button onclick="manageStops()">Manage Stops</button>
-        <button onclick="manageAdmins()">Manage Admins</button> 
-        <button class="back-button" onclick="/main.html">Back</button> -->
+      <!-- You can add additional buttons for other functionalities here if needed -->
     </div>
 
     <div class="button-container">
@@ -44,7 +41,9 @@
       <button name="Drivers" onclick="manageEntity('drivers')">Drivers</button>
       <button name="Stops" onclick="manageEntity('stops')">Stops</button>
     </div>
+    
     <div class="list-container">
+      <h2>Entity List</h2>
       <ul id="entity-list"></ul>
     </div>
   </body>
